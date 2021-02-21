@@ -117,4 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="AddContactButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABEAAAAUCAIAAADkwkEeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAMhJREFUOE9j+EA6GEp6Pn78+AkJQEVRAbqeL1++3Hh248SdY1ceX/769StUFBVg
+        0dO4pca21zhvVQa19QD9AFQKAUB1yHqgol++IPsNpAfIB7q+f083BEXNCwbqCZrlBRc5de/k58+fIRqA
+        AKpn95UdQHW40PLTS7HoOX77SOLiKAjymuoIVOc2yRYusv3yVnQ9QP8AnQ4HyP6BA3T/IAOgd2kW1sgA
+        qGfP1V2zDk/ffGEjsXqA7gZ6Fw6goqgAXQ8xgD56PnwAAM//df4ShAzrAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="ChangeContact.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAXCAIAAACEf/j0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAhJJREFUOE+1lN1L21AUwPMPORnImPjWwOgQa3FP0mJxbEOsik+2ozBxMEhYGat7
+        GMNJUNetaFuxxQ+cuFWtG65ca7uu0dap0aW2XZqk6d538qHiMLNF/HESktz8bs49995gwhXQ5D8K6nX1
+        YKIoJrM50vsNInNQgFutpQqw2I+jIeorbvc/IpdSu/lKpSJdRFlBk07AQtGMdWjhbv/0SDgRXs8GIzsr
+        6Gc6nZ48TygUisfjHMdpngIW2dyHhD1+hGi2f/jznd5AFzk34p3ptvecYrFYzWYzQRAIoXw+r6nqmKFU
+        h8elnpefGtrH65rfwvkBsZhhCtxvni8JAi/6pwIGgwHHcafTGYvFSiV4qshwgL/Hcq0DMzfvUSDXtci+
+        9ekCvXcsp3kiA0aj0eVyRaNRdfzaVBU5fnWLsb9Yvt3hBf9Gyyj4D8mPiP4lCmcyYDKZfD4flPBMBqCz
+        la0DGHaj7T349a2jbY/DG6kjeC+ZSI6Njath67BRFPWvDMA8za/T95/N3bJM4N1TngCa/ZLdPSxKZQmS
+        V8Mx4NCVoZ6eiXnIn3i3gbZZ55u1YGRbkipVySRJut1uKCJ80PF6tanzw6vgZi3yc1mGIjA5jt4v5IpC
+        jTIPSxyiLIpyyH3VJOvFdcqDTwaTie960dfb9z8ZlhEsYz2gVVdmGCZ1GSzLXiDDDlH2/OWoP5xzcq1c
+        QRaEv4GzW4xi2t7dAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="RemoveContactButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAOCAIAAACU32q7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAFlJREFUKFNj+EAEGJSKPn78+AU3gCr69OnTvXv3JmGAKVOmPHv2DGgEVNGZM2ec
+        MICrq+utW7cQiq5cuZKGATIzM+/fvw9VBKS+4gYgFwEVQSj8gK6KPnwAANIVtuVDXP30AAAAAElFTkSu
+        QmCC
+</value>
+  </data>
 </root>
