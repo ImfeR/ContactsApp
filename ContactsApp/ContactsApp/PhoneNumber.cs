@@ -2,10 +2,20 @@
 
 namespace ContactsApp
 {
+    /// <summary>
+    /// Класс номера телефона.
+    /// </summary>
     public class PhoneNumber
     {
+        /// <summary>
+        /// Номер телефона.
+        /// </summary>
         private string _number;
 
+        /// <summary>
+        /// Возвращает и задает номер телефона.
+        /// Номер должен содержать ровно 11 цифр. Первая цифра должна быть ‘7’.
+        /// </summary>
         public string Number
         {
             get { return _number; }
@@ -35,6 +45,20 @@ namespace ContactsApp
                     _number = value;
                 }
             }
+        }
+
+        public PhoneNumber(string number)
+        {
+            Number = number;
+        }
+
+        /// <summary>
+        /// Конструктор по умолчанию.
+        /// Занчение по умолчанию: "70000000000".
+        /// </summary>
+        public PhoneNumber()
+        {
+            Number = "70000000000";
         }
     }
 }
