@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace ContactsApp
 {
@@ -7,15 +9,66 @@ namespace ContactsApp
     /// </summary>
     public class Project
     {
+        /// <summary>
+        /// Список объектов класса Contact
+        /// </summary>
         private List<Contact> _contactsList;
-        
+
+        /// <summary>
+        /// Возвращает и задает список контактов. 
+        /// </summary>
+        public List<Contact> ContactsList
+        {
+            get { return _contactsList; }
+
+            set
+            {
+                _contactsList = value;
+            }
+        }
+
+        /// <summary>
+        /// Добавление нового контакта
+        /// </summary>
+        /// <param name="newContact">Объект класса Contact нового контакта</param>
+        public void AddNewContact(Contact newContact)
+        {
+            if (_contactsList == null)
+            {
+                _contactsList = new List<Contact> {newContact};
+            }
+            else
+            {
+                string newContactNameSurname = newContact.Surname + newContact.Name;
+                for (int i = 0; i < _contactsList.Count; i++)
+                {
+                    string currentContactNameSurname = _contactsList[i].Surname + _contactsList[i].Name;
+
+                    if (string.Compare(newContactNameSurname, currentContactNameSurname) <= 0)
+                    {
+                        _contactsList.Insert(i,newContact);
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        public void RemoveContact()
+        {
+
+        }
+
+
+
+
+
         /// <summary>
         /// Конструктор по умолчанию.
-        /// Создает пустой список элементов класса Contact
         /// </summary>
         public Project()
         {
-            _contactsList = new List<Contact>();
+            _contactsList = null;
         }
 
         /// <summary>
@@ -28,7 +81,6 @@ namespace ContactsApp
         {
             _contactsList = contactsList;
         }
-
 
     }
 }
