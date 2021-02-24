@@ -168,7 +168,42 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Создает копию объекта класса контакт.
+        /// Конструтор класса Contact пол умолчанию.
+        /// Имени, фимилии, E-mail, ID на vk.com - null.
+        /// Телефон - 70000000000, День рождения - 01.01.1900.
+        /// </summary>
+        public Contact()
+        {
+            PhoneNumber newPhone = new PhoneNumber();
+            PhoneNumber = newPhone;
+            Name = null;
+            Surname = null;
+            Birthday = new DateTime(1900, 1, 1);
+            Email = null;
+            VkId = null;
+        }
+
+        /// <summary>
+        /// Конструктор класс Contact, заполняющий поля экземпляра класса.
+        /// </summary>
+        /// <param name="phoneNumber">Номер телефона контакта в виде объекта класса PhoneNumber.</param>
+        /// <param name="name">Имя контакта.</param>
+        /// <param name="surname">Фамилия контакта.</param>
+        /// <param name="birthday">День рождения контакта.</param>
+        /// <param name="email">E-mail контакта.</param>
+        /// <param name="vkId">ID на vk.com контакта.</param>
+        public Contact(PhoneNumber phoneNumber, string name, string surname, DateTime birthday, string email, string vkId)
+        {
+            PhoneNumber = phoneNumber;
+            Name = name;
+            Surname = surname;
+            Birthday = birthday;
+            Email = email;
+            VkId = vkId;
+        }
+
+        /// <summary>
+        /// Создает копию объекта класса Contact.
         /// </summary>
         /// <returns>Возвращает экземпляр класса с такими же значениями.</returns>
         public object Clone()
