@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace ContactsApp
 {
@@ -12,74 +10,67 @@ namespace ContactsApp
         /// <summary>
         /// Список объектов класса Contact
         /// </summary>
-        private List<Contact> _contactsList;
+        private List<Contact> _contacts;
 
         /// <summary>
         /// Возвращает и задает список контактов. 
         /// </summary>
-        public List<Contact> ContactsList
+        public List<Contact> Contacts
         {
-            get { return _contactsList; }
+            get { return _contacts; }
 
             set
             {
-                _contactsList = value;
+                _contacts = value;
             }
         }
 
         /// <summary>
-        /// Добавление нового контакта
+        /// Добавление нового контакта в сортированом порядке.
         /// </summary>
         /// <param name="newContact">Объект класса Contact нового контакта</param>
-        public void AddNewContact(Contact newContact)
+        public int AddNewContact(Contact newContact)
         {
-            if (_contactsList == null)
+            if (_contacts == null)
             {
-                _contactsList = new List<Contact> {newContact};
+                _contacts = new List<Contact> {newContact};
+                return 0;
             }
             else
             {
                 string newContactNameSurname = newContact.Surname + newContact.Name;
-                for (int i = 0; i < _contactsList.Count; i++)
+                for (int i = 0; i < _contacts.Count; i++)
                 {
-                    string currentContactNameSurname = _contactsList[i].Surname + _contactsList[i].Name;
+                    string currentContactNameSurname = _contacts[i].Surname + _contacts[i].Name;
 
                     if (string.Compare(newContactNameSurname, currentContactNameSurname) <= 0)
                     {
-                        _contactsList.Insert(i,newContact);
-                        break;
+                        _contacts.Insert(i,newContact);
+                        return i;
                     }
                 }
+                _contacts.Add(newContact);
+                return _contacts.Count - 1;
             }
         }
-
-
-        public void RemoveContact()
-        {
-
-        }
-
-
-
-
 
         /// <summary>
         /// Конструктор по умолчанию.
         /// </summary>
         public Project()
         {
-            _contactsList = null;
+            _contacts = null;
         }
 
         /// <summary>
         /// Конструктор класса, инициализирующий списко элементов класса Contact.
         /// </summary>
-        /// <param name="contactsList">
+        /// <param name="contacts">
         /// Списко элементов класса Contact.
         /// </param>
-        public Project(List<Contact> contactsList)
+        public Project(List<Contact> contacts)
         {
-            _contactsList = contactsList;
+            _contacts = contacts;
         }
 
     }

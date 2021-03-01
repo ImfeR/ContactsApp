@@ -107,7 +107,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.27F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(7, 58);
+            this.label4.Location = new System.Drawing.Point(6, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 15);
             this.label4.TabIndex = 3;
@@ -117,7 +117,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.27F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(17, 138);
+            this.label5.Location = new System.Drawing.Point(12, 138);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 15);
             this.label5.TabIndex = 6;
@@ -127,7 +127,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.27F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(14, 109);
+            this.label6.Location = new System.Drawing.Point(14, 112);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 15);
             this.label6.TabIndex = 5;
@@ -144,6 +144,7 @@
             // 
             this.SurnameBox.Location = new System.Drawing.Point(64, 3);
             this.SurnameBox.Name = "SurnameBox";
+            this.SurnameBox.ReadOnly = true;
             this.SurnameBox.Size = new System.Drawing.Size(488, 20);
             this.SurnameBox.TabIndex = 8;
             // 
@@ -151,6 +152,7 @@
             // 
             this.NameBox.Location = new System.Drawing.Point(64, 29);
             this.NameBox.Name = "NameBox";
+            this.NameBox.ReadOnly = true;
             this.NameBox.Size = new System.Drawing.Size(488, 20);
             this.NameBox.TabIndex = 9;
             // 
@@ -158,13 +160,15 @@
             // 
             this.PhoneBox.Location = new System.Drawing.Point(64, 81);
             this.PhoneBox.Name = "PhoneBox";
+            this.PhoneBox.ReadOnly = true;
             this.PhoneBox.Size = new System.Drawing.Size(488, 20);
             this.PhoneBox.TabIndex = 11;
             // 
             // VKIdBox
             // 
-            this.VKIdBox.Location = new System.Drawing.Point(64, 133);
+            this.VKIdBox.Location = new System.Drawing.Point(64, 135);
             this.VKIdBox.Name = "VKIdBox";
+            this.VKIdBox.ReadOnly = true;
             this.VKIdBox.Size = new System.Drawing.Size(488, 20);
             this.VKIdBox.TabIndex = 13;
             // 
@@ -172,12 +176,15 @@
             // 
             this.EmailBox.Location = new System.Drawing.Point(64, 109);
             this.EmailBox.Name = "EmailBox";
+            this.EmailBox.ReadOnly = true;
             this.EmailBox.Size = new System.Drawing.Size(488, 20);
             this.EmailBox.TabIndex = 12;
             // 
             // BirthdayDateTime
             // 
+            this.BirthdayDateTime.Enabled = false;
             this.BirthdayDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.BirthdayDateTime.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.BirthdayDateTime.Location = new System.Drawing.Point(64, 55);
             this.BirthdayDateTime.Name = "BirthdayDateTime";
             this.BirthdayDateTime.Size = new System.Drawing.Size(93, 20);
@@ -191,6 +198,7 @@
             this.ContactsList.ScrollAlwaysVisible = true;
             this.ContactsList.Size = new System.Drawing.Size(262, 381);
             this.ContactsList.TabIndex = 15;
+            this.ContactsList.SelectedIndexChanged += new System.EventHandler(this.ContactsList_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
@@ -215,7 +223,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -233,6 +241,7 @@
             this.addContactToolStripMenuItem.Name = "addContactToolStripMenuItem";
             this.addContactToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.addContactToolStripMenuItem.Text = "Add Contact";
+            this.addContactToolStripMenuItem.Click += new System.EventHandler(this.addContactToolStripMenuItem_Click);
             // 
             // editContactToolStripMenuItem
             // 
@@ -274,6 +283,7 @@
             this.AddContactButton.Size = new System.Drawing.Size(23, 21);
             this.AddContactButton.TabIndex = 17;
             this.AddContactButton.UseVisualStyleBackColor = true;
+            this.AddContactButton.Click += new System.EventHandler(this.addContactToolStripMenuItem_Click);
             // 
             // ChangeContact
             // 
@@ -337,7 +347,7 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Location = new System.Drawing.Point(285, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(555, 162);
+            this.panel2.Size = new System.Drawing.Size(555, 169);
             this.panel2.TabIndex = 21;
             // 
             // MainForm

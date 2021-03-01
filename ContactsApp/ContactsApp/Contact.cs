@@ -11,7 +11,7 @@ namespace ContactsApp
         /// <summary>
         /// Номер телефона контакта.
         /// </summary>
-        private PhoneNumber _phoneNumber;
+        private PhoneNumber _phoneNumber = new PhoneNumber();
 
         /// <summary>
         /// Имя контакта.
@@ -41,13 +41,13 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает номер телефона.
         /// </summary>
-        public PhoneNumber PhoneNumber
+        public string PhoneNumber
         {
-            get { return _phoneNumber; }
+            get { return _phoneNumber.Number; }
 
             set
             {
-                PhoneNumber number = new PhoneNumber(value.ToString());
+                PhoneNumber number = new PhoneNumber(value);
                 _phoneNumber = number;
             }
         }
@@ -66,6 +66,10 @@ namespace ContactsApp
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("Имя может содержать не больше 50 символов");
+                }
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("Имя может содержать не менее 1 символа");
                 }
                 else
                 {
@@ -90,8 +94,12 @@ namespace ContactsApp
             {
                 value = value.Trim();
                 if (value.Length > 50)
+                { 
+                    throw new ArgumentException("Фамилия может содержать не больше 50 символов");
+                }
+                if (value.Length == 0)
                 {
-                    throw new ArgumentException("Имя может содержать не больше 50 символов");
+                    throw new ArgumentException("Фамилия может содержать не менее 1 символа");
                 }
                 else
                 {
@@ -113,13 +121,13 @@ namespace ContactsApp
 
             set
             {
-                if (value.Date > DateTime.Today.Date)
+                if (value.Date.CompareTo(DateTime.Today.Date) > 0)
                 {
                     throw new ArgumentException("Дата не может быть больше текущей даты.");
                 }
 
                 DateTime minDate = new DateTime(1900, 1, 1);
-                if (value.Date < minDate.Date)
+                if (value.Date.CompareTo(minDate) < 0)
                 {
                     throw new ArgumentException("Дата не может быть меньше 01.01.1900.");
                 }
@@ -144,6 +152,10 @@ namespace ContactsApp
                 if (value.Length > 50)
                 {
                     throw new ArgumentException("E-mail может содержать не больше 50 символов");
+                }
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("E-mail может содержать не менее 1 символа");
                 }
                 else
                 {
@@ -174,13 +186,12 @@ namespace ContactsApp
         /// </summary>
         public Contact()
         {
-            PhoneNumber newPhone = new PhoneNumber();
-            PhoneNumber = newPhone;
-            Name = null;
-            Surname = null;
-            Birthday = new DateTime(1900, 1, 1);
-            Email = null;
-            VkId = null;
+            PhoneNumber = "70000000000";
+            Name = " name ";
+            Surname = " surname ";
+            Birthday = DateTime.Today;
+            Email = "email@example.com";
+            VkId = "ID000001";
         }
 
         /// <summary>
@@ -192,7 +203,7 @@ namespace ContactsApp
         /// <param name="birthday">День рождения контакта.</param>
         /// <param name="email">E-mail контакта.</param>
         /// <param name="vkId">ID на vk.com контакта.</param>
-        public Contact(PhoneNumber phoneNumber, string name, string surname, DateTime birthday, string email, string vkId)
+        public Contact(string phoneNumber, string name, string surname, DateTime birthday, string email, string vkId)
         {
             PhoneNumber = phoneNumber;
             Name = name;

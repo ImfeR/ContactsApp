@@ -24,7 +24,7 @@ namespace ContactsApp
             {
                 for (var i = 0; i < value.Length; i++)
                 {
-                    if (!char.IsDigit(value, i))
+                    if (char.IsNumber(value.ToString(), i) != true)
                     {
                         throw new ArgumentException("Вводимое значение должно состоять из чисел");
                     }
@@ -58,7 +58,7 @@ namespace ContactsApp
         /// </summary>
         public PhoneNumber()
         {
-            Number = "70000000000";
+            _number = "70000000000";
         }
     }
 }
