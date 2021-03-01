@@ -219,7 +219,7 @@ namespace ContactsApp
         /// <returns>Возвращает экземпляр класса с такими же значениями.</returns>
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return new Contact(PhoneNumber, Name, Surname, Birthday, Email, VkId);
         }
     }
 }
