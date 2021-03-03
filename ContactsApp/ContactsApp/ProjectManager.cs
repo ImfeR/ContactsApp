@@ -16,14 +16,19 @@ namespace ContactsApp
         /// <param name="filePath">Значение пути к директории расположения файла.</param>
         /// <param name="project">Записываемый экземпляр <see cref="Project">.
         /// </param>
-        public static void SaveToFile(string fileName, string filePath, Project project)
+        public static void SaveToFile(string filePath, string fileName, Project project)
         {
-            JsonSerializer serializer = new JsonSerializer();
-
-            using (StreamWriter sw = new StreamWriter(_path + _fileName))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            DirectoryInfo directoryInfo = new DirectoryInfo(filePath);
+            if (!directoryInfo.Exists)
             {
-                serializer.Serialize(writer, project);
+                directoryInfo.Create();
+            }
+
+            var stringJSON = JsonConvert.SerializeObject(project, Formatting.Indented);
+
+            using (StreamWriter streamWriter = new StreamWriter(filePath + fileName, false))
+            {
+                streamWriter.Write(stringJSON);
             }
         }
 
@@ -34,11 +39,16 @@ namespace ContactsApp
         /// <param name="filePath">Значение пути к директории расположения файла.</param>
         /// <returns>Объект <see cref="Project">.
         /// </returns>
-        public static Project LoadFromFile(string fileName, string filePath)
+        public static Project LoadFromFile(string filePath, string fileName)
         {
+            if (!Directory.Exists(filePath))
+            {
+                return new Project();
+            }
+
             if (!File.Exists(filePath + fileName))
             {
-                return null;
+                return new Project();
             }
 
             Project project = new Project();
@@ -49,31 +59,6 @@ namespace ContactsApp
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 project = (Project)serializer.Deserialize<Project>(reader);
-            }
-
-            return project;
-        }
-
-        public static void SaveToFile(Project project)
-        {
-            var proj= JsonConvert.SerializeObject(project, Formatting.Indented);
-            File.WriteAllText("project.json",proj);
-        }
-
-        public static Project LoadFromFile()
-        {
-            if (!File.Exists("project.json"))
-            {
-                return null;
-            }
-            Project project = null;
-
-            JsonSerializer serializer = new JsonSerializer();
-
-            using (StreamReader sr = new StreamReader("project.json"))
-            using (JsonReader reader = new JsonTextReader(sr))
-            {
-                project = (Project) serializer.Deserialize<Project>(reader);
             }
 
             return project;

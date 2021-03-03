@@ -4,53 +4,60 @@ using Newtonsoft.Json;
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс контакта, содержащий номер телефона, имя, фамилию, день рождения,
+    /// Контакт, содержащий номер телефона, имя, фамилию, день рождения,
     /// E-mail и id в vk.com контакта.
     /// </summary>
     public class Contact : ICloneable
     {
+        private const int MaxLineLength = 50;
 
         /// <summary>
         /// Имя контакта.
         /// </summary>
-        private string _name;
+        private string _name = "name";
 
         /// <summary>
         /// Фамилия контакта.
         /// </summary>
-        private string _surname;
+        private string _surname = "surname";
 
         /// <summary>
         /// День рождения контакта.
         /// </summary>
-        private DateTime _birthday;
+        private DateTime _birthday = DateTime.Now;
 
         /// <summary>
         /// E-mail контакта.
         /// </summary>
-        private string _email;
+        private string _email = "email@example.com";
 
         /// <summary>
         /// ID на vk.com.
         /// </summary>
-        private string _vkId;
+        private string _vkId = "ID000001";
+
+        /// <summary>
+        /// Номер телефона.
+        /// </summary>
+        private PhoneNumber _phoneNumber = new PhoneNumber();
 
 
         /// <summary>
         /// Возвращает и задает фамилию контакта.
         /// Длина фаимлии ограничена в 50 символов.
         /// </summary>
-        [JsonProperty("surname")]
         public string Surname
         {
-            get { return _surname; }
-
+            get
+            {
+                return _surname;
+            }
             set
             {
                 value = value.Trim();
-                if (value.Length > 50)
+                if (value.Length > MaxLineLength)
                 {
-                    throw new ArgumentException("Фамилия может содержать не больше 50 символов");
+                    throw new ArgumentException("Фамилия может содержать не больше " + MaxLineLength + " символов");
                 }
                 if (value.Length == 0)
                 {
@@ -70,17 +77,19 @@ namespace ContactsApp
         /// Возвращает и задает имя контакта.
         /// Длина имени ограничена в 50 символов.
         /// </summary>
-        [JsonProperty("name")]
         public string Name
         {
-            get { return _name; }
-
+            get
+            {
+                return _name;
+            }
             set
             {
                 value = value.Trim();
-                if (value.Length > 50)
+                if (value.Length > MaxLineLength)
                 {
-                    throw new ArgumentException("Имя может содержать не больше 50 символов");
+                    throw new ArgumentException("Имя может содержать не больше " 
+                                                + MaxLineLength + "символов");
                 }
                 if (value.Length == 0)
                 {
@@ -101,20 +110,20 @@ namespace ContactsApp
         /// Возвращеает и задает дату рождения.
         /// Дата рождения не может быть больше текущей даты и меньше 01.01.1900.
         /// </summary>
-        [JsonProperty("birthday")]
         public DateTime Birthday
         {
-            get { return _birthday; }
-
+            get
+            {
+                return _birthday;
+            }
             set
             {
-                if (value.Date.CompareTo(DateTime.Today.Date) > 0)
+                if (value > DateTime.Now)
                 {
                     throw new ArgumentException("Дата не может быть больше текущей даты.");
                 }
-
                 DateTime minDate = new DateTime(1900, 1, 1);
-                if (value.Date.CompareTo(minDate) < 0)
+                if (value < minDate)
                 {
                     throw new ArgumentException("Дата не может быть меньше 01.01.1900.");
                 }
@@ -128,8 +137,12 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает номер телефона.
         /// </summary>
-        [JsonProperty("phoneNumber")]
-        public PhoneNumber PhoneNumber { get; set; }
+        public PhoneNumber PhoneNumber
+        {
+            get { return _phoneNumber; }
+
+            set { _phoneNumber = value; }
+        }
 
         /// <summary>
         /// Возвращает и задает электронную почту.
@@ -138,14 +151,17 @@ namespace ContactsApp
         [JsonProperty("email")]
         public string Email
         {
-            get { return _email; }
-
+            get
+            {
+                return _email;
+            }
             set
             {
                 value = value.Trim();
-                if (value.Length > 50)
+                if (value.Length > MaxLineLength)
                 {
-                    throw new ArgumentException("E-mail может содержать не больше 50 символов");
+                    throw new ArgumentException("E-mail может содержать не больше " 
+                                                + MaxLineLength + " символов");
                 }
                 if (value.Length == 0)
                 {
@@ -161,11 +177,12 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает значение Id в vk.com.
         /// </summary>
-        [JsonProperty("vkId")]
         public string VkId
         {
-            get { return _vkId; }
-
+            get
+            {
+                return _vkId;
+            }
             set
             {
                 value = value.Trim();
@@ -176,19 +193,8 @@ namespace ContactsApp
 
         /// <summary>
         /// Создает экземпляр <see cref="Contact">.
-        /// Имя - name, фимилия - surname, E-mail - email@example.com,
-        /// ID на vk.com - ID000001.
-        /// Телефон - 70000000000, День рождения - 01.01.1900.
         /// </summary>
-        public Contact()
-        {
-            Surname = " surname ";
-            Name = " name ";
-            Birthday = DateTime.Today;
-            PhoneNumber = new PhoneNumber();
-            Email = "email@example.com";
-            VkId = "ID000001";
-        }
+        public Contact() { }
 
         /// <summary>
         /// Создает экземпляр <see cref="Contact">.

@@ -12,7 +12,7 @@ namespace ContactsAppUI
         {
             InitializeComponent();
 
-            _project = ProjectManager.LoadFromFile();
+            _project = ProjectManager.LoadFromFile(@"D:\repos\ContactsAppTests\",@"test.JSON");
             if (_project == null || _project.Contacts.Count == 0 )
             {
                 _project = new Project();
@@ -42,7 +42,7 @@ namespace ContactsAppUI
 
             ContactsList.Items.Insert(index, surname);
 
-            ProjectManager.SaveToFile(_project);
+            ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
         }
 
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace ContactsAppUI
             {
                 _project.Contacts.RemoveAt(ContactsList.SelectedIndex);
                 ContactsList.Items.RemoveAt(ContactsList.SelectedIndex);
-                ProjectManager.SaveToFile(_project);
+                ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
             }
             
         }
@@ -95,7 +95,7 @@ namespace ContactsAppUI
 
                 ContactsList.Items.Insert(index, surname);
 
-                ProjectManager.SaveToFile(_project);
+                ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
             }
             
         }

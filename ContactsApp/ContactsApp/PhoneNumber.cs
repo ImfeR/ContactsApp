@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -12,25 +13,24 @@ namespace ContactsApp
         /// <summary>
         /// Номер телефона.
         /// </summary>
-        private string _number;
+        private string _number = "70000000000";
 
         /// <summary>
         /// Возвращает и задает номер телефона.
         /// Номер должен содержать ровно 11 цифр. Первая цифра должна быть ‘7’.
         /// </summary>
-        [JsonProperty("number")]
         public string Number
         {
-            get { return _number; }
+            get
+            {
+                return _number;
+            }
 
             set
             {
-                for (var i = 0; i < value.Length; i++)
+                if (value.Where((t, i) => char.IsNumber(value.ToString(), i) != true).Any())
                 {
-                    if (char.IsNumber(value.ToString(), i) != true)
-                    {
-                        throw new ArgumentException("Вводимое значение должно состоять из чисел");
-                    }
+                    throw new ArgumentException("Вводимое значение должно состоять из чисел");
                 }
                 if (value.Length != 11)
                 {
@@ -48,15 +48,6 @@ namespace ContactsApp
                     _number = value;
                 }
             }
-        }
-
-        /// <summary>
-        /// Создает экземпляр <see cref="PhoneNumber">.
-        /// Занчение по умолчанию: "70000000000".
-        /// </summary>
-        public PhoneNumber()
-        {
-            _number = "70000000000";
         }
     }
 }

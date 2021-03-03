@@ -11,7 +11,6 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает список контактов. 
         /// </summary>
-        [JsonProperty("contacts")]
         public List<Contact> Contacts { get; set; }
 
         /// <summary>
@@ -48,14 +47,14 @@ namespace ContactsApp
         /// </summary>
         public Project()
         {
-            Contacts = null;
+            Contacts = new List<Contact>();
         }
 
         /// <summary>
-        /// Конструктор класса, инициализирующий списко элементов класса Contact.
+        /// Конструктор класса, инициализирующий списоков элементов класса Contact.
         /// </summary>
         /// <param name="contacts">
-        /// Списко элементов класса Contact.
+        /// Список элементов класса Contact.
         /// </param>
         public Project(List<Contact> contacts)
         {

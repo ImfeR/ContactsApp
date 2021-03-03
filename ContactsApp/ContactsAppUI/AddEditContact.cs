@@ -11,8 +11,10 @@ namespace ContactsAppUI
 
         public Contact Contact
         {
-            get { return _contact; }
-
+            get
+            {
+                return _contact;
+            }
             set
             {
                 _contact = value;
