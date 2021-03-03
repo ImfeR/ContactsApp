@@ -53,7 +53,7 @@ namespace ContactsAppUI
                 NameBox.Text = _project.Contacts[ContactsList.SelectedIndex].Name;
                 BirthdayDateTime.Value = _project.Contacts[ContactsList.SelectedIndex].Birthday;
                 EmailBox.Text = _project.Contacts[ContactsList.SelectedIndex].Email;
-                PhoneBox.Text = "+" + _project.Contacts[ContactsList.SelectedIndex].PhoneNumber.Number;
+                PhoneBox.Text = @"+" + _project.Contacts[ContactsList.SelectedIndex].PhoneNumber.Number;
                 VKIdBox.Text = _project.Contacts[ContactsList.SelectedIndex].VkId;
             }
         }
@@ -62,7 +62,7 @@ namespace ContactsAppUI
         {
             if (ContactsList.SelectedIndex == -1)
             {
-                MessageBox.Show("Select contact for delete");
+                MessageBox.Show(@"Select contact for delete");
             }
             else
             {
@@ -77,7 +77,7 @@ namespace ContactsAppUI
         {
             if (ContactsList.SelectedIndex == -1)
             {
-                MessageBox.Show("Select contact for delete");
+                MessageBox.Show(@"Select contact for delete");
             }
             else
             {

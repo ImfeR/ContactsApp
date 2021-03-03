@@ -51,7 +51,7 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Создает экземпляр <see cref="PhoneNumber">..
+        /// Создает экземпляр <see cref="PhoneNumber">.
         /// Занчение по умолчанию: "70000000000".
         /// </summary>
         public PhoneNumber()

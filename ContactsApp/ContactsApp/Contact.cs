@@ -35,11 +35,36 @@ namespace ContactsApp
         /// </summary>
         private string _vkId;
 
+
         /// <summary>
-        /// Возвращает и задает номер телефона.
+        /// Возвращает и задает фамилию контакта.
+        /// Длина фаимлии ограничена в 50 символов.
         /// </summary>
-        [JsonProperty("phoneNumber")]
-        public PhoneNumber PhoneNumber { get; set; }
+        [JsonProperty("surname")]
+        public string Surname
+        {
+            get { return _surname; }
+
+            set
+            {
+                value = value.Trim();
+                if (value.Length > 50)
+                {
+                    throw new ArgumentException("Фамилия может содержать не больше 50 символов");
+                }
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("Фамилия может содержать не менее 1 символа");
+                }
+                else
+                {
+                    var firstLetter = value[0];
+                    value = value.Substring(1);
+                    value = firstLetter.ToString().ToUpper() + value;
+                    _surname = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает имя контакта.
@@ -73,36 +98,6 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Возвращает и задает фамилию контакта.
-        /// Длина фаимлии ограничена в 50 символов.
-        /// </summary>
-        [JsonProperty("surname")]
-        public string Surname
-        {
-            get { return _surname; }
-
-            set
-            {
-                value = value.Trim();
-                if (value.Length > 50)
-                { 
-                    throw new ArgumentException("Фамилия может содержать не больше 50 символов");
-                }
-                if (value.Length == 0)
-                {
-                    throw new ArgumentException("Фамилия может содержать не менее 1 символа");
-                }
-                else
-                {
-                    var firstLetter = value[0];
-                    value = value.Substring(1);
-                    value = firstLetter.ToString().ToUpper() + value;
-                    _surname = value;
-                }
-            }
-        }
-
-        /// <summary>
         /// Возвращеает и задает дату рождения.
         /// Дата рождения не может быть больше текущей даты и меньше 01.01.1900.
         /// </summary>
@@ -129,7 +124,13 @@ namespace ContactsApp
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Возвращает и задает номер телефона.
+        /// </summary>
+        [JsonProperty("phoneNumber")]
+        public PhoneNumber PhoneNumber { get; set; }
+
         /// <summary>
         /// Возвращает и задает электронную почту.
         /// Длина электронной почты не может быть больше 50 символов.
@@ -181,10 +182,10 @@ namespace ContactsApp
         /// </summary>
         public Contact()
         {
-            PhoneNumber = new PhoneNumber();
-            Name = " name ";
             Surname = " surname ";
+            Name = " name ";
             Birthday = DateTime.Today;
+            PhoneNumber = new PhoneNumber();
             Email = "email@example.com";
             VkId = "ID000001";
         }
@@ -211,7 +212,8 @@ namespace ContactsApp
         /// <summary>
         /// Создает копию экземпляра <see cref="Contact">.
         /// </summary>
-        /// <returns>Возвращает экземпляр <see cref="Contact"> с такими же значениями.</returns>
+        /// <returns>Возвращает экземпляр <see cref="Contact"> с такими же значениями.
+        /// </returns>
         public object Clone()
         {
             return new Contact(PhoneNumber, Name, Surname, Birthday, Email, VkId);

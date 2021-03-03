@@ -6,17 +6,16 @@ namespace ContactsApp
 {
     public static class ProjectManager
     {
-        public static string _path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Denisov\ContactsApp";
-        public static string _fileName = @"project.json";
-
-        
+        public static string _path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\ContactsApp";
+        public static string _fileName = @"Contacts.json";
 
         /// <summary>
         /// Метод записи объекта <see cref="Project"> в файл.
         /// </summary>
         /// <param name="fileName">Имя файла для записи.</param>
         /// <param name="filePath">Значение пути к директории расположения файла.</param>
-        /// <param name="project">Записываемый экземпляр <see cref="Project">.</param>
+        /// <param name="project">Записываемый экземпляр <see cref="Project">.
+        /// </param>
         public static void SaveToFile(string fileName, string filePath, Project project)
         {
             JsonSerializer serializer = new JsonSerializer();
@@ -33,7 +32,8 @@ namespace ContactsApp
         /// </summary>
         /// <param name="fileName">Имя файла для чтения.</param>
         /// <param name="filePath">Значение пути к директории расположения файла.</param>
-        /// <returns>Объект <see cref="Project">.</returns>
+        /// <returns>Объект <see cref="Project">.
+        /// </returns>
         public static Project LoadFromFile(string fileName, string filePath)
         {
             if (!File.Exists(filePath + fileName))
@@ -56,16 +56,8 @@ namespace ContactsApp
 
         public static void SaveToFile(Project project)
         {
-            //JsonSerializer serializer = new JsonSerializer();
-
             var proj= JsonConvert.SerializeObject(project, Formatting.Indented);
             File.WriteAllText("project.json",proj);
-
-            /*using (StreamWriter sw = new StreamWriter("project.json"))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                serializer.Serialize(writer, project);
-            }*/
         }
 
         public static Project LoadFromFile()
