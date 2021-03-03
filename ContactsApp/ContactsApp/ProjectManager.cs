@@ -4,12 +4,18 @@ using System.IO;
 
 namespace ContactsApp
 {
-    public class ProjectManager
+    public static class ProjectManager
     {
         public static string _path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Denisov\ContactsApp";
         public static string _fileName = @"project.json";
 
-        public static void WriteFile(string fileName, string filePath, Project project)
+        /// <summary>
+        /// Метод записи объекта <see cref="Project"> в файл.
+        /// </summary>
+        /// <param name="fileName">Имя файла для записи.</param>
+        /// <param name="filePath">Значение пути к директории расположения файла.</param>
+        /// <param name="project">Записываемый экземпляр <see cref="Project">.</param>
+        public static void SaveToFile(string fileName, string filePath, Project project)
         {
             JsonSerializer serializer = new JsonSerializer();
 
@@ -20,9 +26,15 @@ namespace ContactsApp
             }
         }
 
-        public static Project ReadFile(string fileName, string filePath)
+        /// <summary>
+        /// Метод чтения объекта <see cref="Project"> из файла.
+        /// </summary>
+        /// <param name="fileName">Имя файла для чтения.</param>
+        /// <param name="filePath">Значение пути к директории расположения файла.</param>
+        /// <returns>Объект <see cref="Project">.</returns>
+        public static Project LoadFromFile(string fileName, string filePath)
         {
-            if (!File.Exists(_path + _fileName))
+            if (!File.Exists(filePath + fileName))
             {
                 return null;
             }
@@ -31,7 +43,7 @@ namespace ContactsApp
 
             JsonSerializer serializer = new JsonSerializer();
 
-            using (StreamReader sr = new StreamReader(_path + _fileName))
+            using (StreamReader sr = new StreamReader(filePath + fileName))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 project = (Project)serializer.Deserialize<Project>(reader);
@@ -40,7 +52,7 @@ namespace ContactsApp
             return project;
         }
 
-        public static void WriteFile(Project project)
+        public static void SaveToFile(Project project)
         {
             JsonSerializer serializer = new JsonSerializer();
 
@@ -51,7 +63,7 @@ namespace ContactsApp
             }
         }
 
-        public static Project ReadFile()
+        public static Project LoadFromFile()
         {
             if (!File.Exists(@"project.json"))
             {

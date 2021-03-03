@@ -12,7 +12,7 @@ namespace ContactsAppUI
         {
             InitializeComponent();
 
-            _project = ProjectManager.ReadFile();
+            _project = ProjectManager.LoadFromFile();
             if (_project == null || _project.Contacts.Count == 0 )
             {
                 _project = new Project();
@@ -42,7 +42,7 @@ namespace ContactsAppUI
 
             ContactsList.Items.Insert(index, surname);
 
-            ProjectManager.WriteFile(_project);
+            ProjectManager.SaveToFile(_project);
         }
 
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace ContactsAppUI
                 NameBox.Text = _project.Contacts[ContactsList.SelectedIndex].Name;
                 BirthdayDateTime.Value = _project.Contacts[ContactsList.SelectedIndex].Birthday;
                 EmailBox.Text = _project.Contacts[ContactsList.SelectedIndex].Email;
-                PhoneBox.Text = "+" + _project.Contacts[ContactsList.SelectedIndex].PhoneNumber;
+                PhoneBox.Text = "+" + _project.Contacts[ContactsList.SelectedIndex].PhoneNumber.Number;
                 VKIdBox.Text = _project.Contacts[ContactsList.SelectedIndex].VkId;
             }
         }
@@ -68,7 +68,7 @@ namespace ContactsAppUI
             {
                 _project.Contacts.RemoveAt(ContactsList.SelectedIndex);
                 ContactsList.Items.RemoveAt(ContactsList.SelectedIndex);
-                ProjectManager.WriteFile(_project);
+                ProjectManager.SaveToFile(_project);
             }
             
         }
@@ -95,7 +95,7 @@ namespace ContactsAppUI
 
                 ContactsList.Items.Insert(index, surname);
 
-                ProjectManager.WriteFile(_project);
+                ProjectManager.SaveToFile(_project);
             }
             
         }

@@ -21,7 +21,7 @@ namespace ContactsAppUI
                     NameBox.Text = _contact.Name;
                     SurnameBox.Text = _contact.Surname;
                     BirthdayDateTime.Value = _contact.Birthday;
-                    PhoneBox.Text = _contact.PhoneNumber;
+                    PhoneBox.Text = _contact.PhoneNumber.Number;
                     EmailBox.Text = _contact.Email;
                     VKIdBox.Text = _contact.VkId;
                 }
@@ -71,7 +71,7 @@ namespace ContactsAppUI
             try
             {
                 PhoneBox.BackColor = SystemColors.Control;
-                _contact.PhoneNumber = PhoneBox.Text;
+                _contact.PhoneNumber.Number = PhoneBox.Text;
             }
             catch (ArgumentException exception)
             {

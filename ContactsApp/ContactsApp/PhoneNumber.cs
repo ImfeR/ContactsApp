@@ -47,13 +47,8 @@ namespace ContactsApp
             }
         }
 
-        public PhoneNumber(string number)
-        {
-            Number = number;
-        }
-
         /// <summary>
-        /// Конструктор по умолчанию.
+        /// Создает экземпляр <see cref="PhoneNumber">..
         /// Занчение по умолчанию: "70000000000".
         /// </summary>
         public PhoneNumber()

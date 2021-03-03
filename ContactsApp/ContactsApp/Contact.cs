@@ -8,10 +8,6 @@ namespace ContactsApp
     /// </summary>
     public class Contact : ICloneable
     {
-        /// <summary>
-        /// Номер телефона контакта.
-        /// </summary>
-        private PhoneNumber _phoneNumber = new PhoneNumber();
 
         /// <summary>
         /// Имя контакта.
@@ -41,16 +37,7 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает номер телефона.
         /// </summary>
-        public string PhoneNumber
-        {
-            get { return _phoneNumber.Number; }
-
-            set
-            {
-                PhoneNumber number = new PhoneNumber(value);
-                _phoneNumber = number;
-            }
-        }
+        public PhoneNumber PhoneNumber { get; set; }
 
         /// <summary>
         /// Возвращает и задает имя контакта.
@@ -186,7 +173,7 @@ namespace ContactsApp
         /// </summary>
         public Contact()
         {
-            PhoneNumber = "70000000000";
+            PhoneNumber = new PhoneNumber();
             Name = " name ";
             Surname = " surname ";
             Birthday = DateTime.Today;
@@ -195,7 +182,7 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Конструктор класс Contact, заполняющий поля экземпляра класса.
+        /// Создает экземпляр <see cref="Contact">.
         /// </summary>
         /// <param name="phoneNumber">Номер телефона контакта в виде объекта класса PhoneNumber.</param>
         /// <param name="name">Имя контакта.</param>
@@ -203,7 +190,7 @@ namespace ContactsApp
         /// <param name="birthday">День рождения контакта.</param>
         /// <param name="email">E-mail контакта.</param>
         /// <param name="vkId">ID на vk.com контакта.</param>
-        public Contact(string phoneNumber, string name, string surname, DateTime birthday, string email, string vkId)
+        public Contact(PhoneNumber phoneNumber, string name, string surname, DateTime birthday, string email, string vkId)
         {
             PhoneNumber = phoneNumber;
             Name = name;
@@ -214,9 +201,9 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Создает копию объекта класса Contact.
+        /// Создает копию экземпляра <see cref="Contact">.
         /// </summary>
-        /// <returns>Возвращает экземпляр класса с такими же значениями.</returns>
+        /// <returns>Возвращает экземпляр <see cref="Contact"> с такими же значениями.</returns>
         public object Clone()
         {
             return new Contact(PhoneNumber, Name, Surname, Birthday, Email, VkId);
