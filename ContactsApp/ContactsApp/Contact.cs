@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace ContactsApp
 {
@@ -37,12 +38,14 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает номер телефона.
         /// </summary>
+        [JsonProperty("phoneNumber")]
         public PhoneNumber PhoneNumber { get; set; }
 
         /// <summary>
         /// Возвращает и задает имя контакта.
         /// Длина имени ограничена в 50 символов.
         /// </summary>
+        [JsonProperty("name")]
         public string Name
         {
             get { return _name; }
@@ -73,6 +76,7 @@ namespace ContactsApp
         /// Возвращает и задает фамилию контакта.
         /// Длина фаимлии ограничена в 50 символов.
         /// </summary>
+        [JsonProperty("surname")]
         public string Surname
         {
             get { return _surname; }
@@ -102,6 +106,7 @@ namespace ContactsApp
         /// Возвращеает и задает дату рождения.
         /// Дата рождения не может быть больше текущей даты и меньше 01.01.1900.
         /// </summary>
+        [JsonProperty("birthday")]
         public DateTime Birthday
         {
             get { return _birthday; }
@@ -129,6 +134,7 @@ namespace ContactsApp
         /// Возвращает и задает электронную почту.
         /// Длина электронной почты не может быть больше 50 символов.
         /// </summary>
+        [JsonProperty("email")]
         public string Email
         {
             get { return _email; }
@@ -154,6 +160,7 @@ namespace ContactsApp
         /// <summary>
         /// Возвращает и задает значение Id в vk.com.
         /// </summary>
+        [JsonProperty("vkId")]
         public string VkId
         {
             get { return _vkId; }
@@ -167,8 +174,9 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Конструтор класса Contact пол умолчанию.
-        /// Имени, фимилии, E-mail, ID на vk.com - null.
+        /// Создает экземпляр <see cref="Contact">.
+        /// Имя - name, фимилия - surname, E-mail - email@example.com,
+        /// ID на vk.com - ID000001.
         /// Телефон - 70000000000, День рождения - 01.01.1900.
         /// </summary>
         public Contact()

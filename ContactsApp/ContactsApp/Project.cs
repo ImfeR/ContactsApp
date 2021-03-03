@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ContactsApp
 {
@@ -8,22 +10,10 @@ namespace ContactsApp
     public class Project
     {
         /// <summary>
-        /// Список объектов класса Contact
-        /// </summary>
-        private List<Contact> _contacts;
-
-        /// <summary>
         /// Возвращает и задает список контактов. 
         /// </summary>
-        public List<Contact> Contacts
-        {
-            get { return _contacts; }
-
-            set
-            {
-                _contacts = value;
-            }
-        }
+        [JsonProperty("contacts")]
+        public List<Contact> Contacts { get; set; }
 
         /// <summary>
         /// Добавление нового контакта в сортированом порядке.
@@ -31,26 +21,26 @@ namespace ContactsApp
         /// <param name="newContact">Объект класса Contact нового контакта</param>
         public int AddNewContact(Contact newContact)
         {
-            if (_contacts == null)
+            if (Contacts == null)
             {
-                _contacts = new List<Contact> {newContact};
+                Contacts = new List<Contact> {newContact};
                 return 0;
             }
             else
             {
                 string newContactNameSurname = newContact.Surname + newContact.Name;
-                for (int i = 0; i < _contacts.Count; i++)
+                for (int i = 0; i < Contacts.Count; i++)
                 {
-                    string currentContactNameSurname = _contacts[i].Surname + _contacts[i].Name;
+                    string currentContactNameSurname = Contacts[i].Surname + Contacts[i].Name;
 
                     if (string.Compare(newContactNameSurname, currentContactNameSurname) <= 0)
                     {
-                        _contacts.Insert(i,newContact);
+                        Contacts.Insert(i,newContact);
                         return i;
                     }
                 }
-                _contacts.Add(newContact);
-                return _contacts.Count - 1;
+                Contacts.Add(newContact);
+                return Contacts.Count - 1;
             }
         }
 
@@ -59,7 +49,7 @@ namespace ContactsApp
         /// </summary>
         public Project()
         {
-            _contacts = null;
+            Contacts = null;
         }
 
         /// <summary>
@@ -70,7 +60,7 @@ namespace ContactsApp
         /// </param>
         public Project(List<Contact> contacts)
         {
-            _contacts = contacts;
+            Contacts = contacts;
         }
 
     }

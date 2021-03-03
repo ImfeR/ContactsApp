@@ -9,6 +9,8 @@ namespace ContactsApp
         public static string _path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Denisov\ContactsApp";
         public static string _fileName = @"project.json";
 
+        
+
         /// <summary>
         /// Метод записи объекта <see cref="Project"> в файл.
         /// </summary>
@@ -54,18 +56,21 @@ namespace ContactsApp
 
         public static void SaveToFile(Project project)
         {
-            JsonSerializer serializer = new JsonSerializer();
+            //JsonSerializer serializer = new JsonSerializer();
 
-            using (StreamWriter sw = new StreamWriter(@"project.json"))
+            var proj= JsonConvert.SerializeObject(project, Formatting.Indented);
+            File.WriteAllText("project.json",proj);
+
+            /*using (StreamWriter sw = new StreamWriter("project.json"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, project);
-            }
+            }*/
         }
 
         public static Project LoadFromFile()
         {
-            if (!File.Exists(@"project.json"))
+            if (!File.Exists("project.json"))
             {
                 return null;
             }
@@ -73,7 +78,7 @@ namespace ContactsApp
 
             JsonSerializer serializer = new JsonSerializer();
 
-            using (StreamReader sr = new StreamReader(@"project.json"))
+            using (StreamReader sr = new StreamReader("project.json"))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 project = (Project) serializer.Deserialize<Project>(reader);

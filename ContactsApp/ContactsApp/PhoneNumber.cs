@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+
 
 namespace ContactsApp
 {
@@ -16,6 +18,7 @@ namespace ContactsApp
         /// Возвращает и задает номер телефона.
         /// Номер должен содержать ровно 11 цифр. Первая цифра должна быть ‘7’.
         /// </summary>
+        [JsonProperty("number")]
         public string Number
         {
             get { return _number; }
