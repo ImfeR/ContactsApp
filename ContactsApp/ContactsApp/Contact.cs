@@ -122,13 +122,15 @@ namespace ContactsApp
                 if (value > DateTime.Now)
                 {
                     throw new ArgumentException("The date cannot be greater than the current date, " +
-                                                "and you entered" + value.Date);
+                                                "and you entered: " + value.Date.Day 
+                                                + "." + value.Date.Month + "." + value.Date.Year);
                 }
                 DateTime minDate = new DateTime(1900, 1, 1);
                 if (value < minDate)
                 {
                     throw new ArgumentException("The date cannot be less than 01.01.1900, " +
-                                                "and you entered" + value.Date);
+                                                "and you entered: " + value.Date.Day 
+                                                + "." + value.Date.Month + "." + value.Date.Year);
                 }
                 else
                 {
@@ -189,6 +191,12 @@ namespace ContactsApp
             set
             {
                 value = value.Trim();
+
+                if (value.Length > MaxLineLength)
+                {
+                    throw new ArgumentException("VK ID can contain no more than" + MaxLineLength
+                        + " characters, and you have " + value.Length);
+                }
 
                 _vkId = value;
             }

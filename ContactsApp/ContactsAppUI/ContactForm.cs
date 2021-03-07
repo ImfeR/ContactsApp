@@ -9,6 +9,11 @@ namespace ContactsAppUI
     {
         private Contact _contact;
 
+        private readonly string[] _exceptionMessages = 
+        {
+            "", "", "", "", "", ""
+        };
+
         public Contact Contact
         {
             get
@@ -20,12 +25,12 @@ namespace ContactsAppUI
                 _contact = value;
                 if (_contact != null)
                 {
-                    NameBox.Text = _contact.Name;
-                    SurnameBox.Text = _contact.Surname;
-                    BirthdayDateTime.Value = _contact.Birthday;
-                    PhoneBox.Text = _contact.PhoneNumber.Number;
-                    EmailBox.Text = _contact.Email;
-                    VKIdBox.Text = _contact.VkId;
+                    NameTextbox.Text = _contact.Name;
+                    SurnameTextbox.Text = _contact.Surname;
+                    BirthdayDateTimebox.Value = _contact.Birthday;
+                    PhoneTextbox.Text = _contact.PhoneNumber.Number;
+                    EmailTextbox.Text = _contact.Email;
+                    VKIdTextbox.Text = _contact.VkId;
                 }
             }
         }
@@ -38,20 +43,25 @@ namespace ContactsAppUI
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            this.Close();
+            if (!CheckExceptionMessage())
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void SurnameBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                SurnameBox.BackColor = SystemColors.Control;
-                _contact.Surname = SurnameBox.Text;
+                _exceptionMessages[0] = "";
+                SurnameTextbox.BackColor = SystemColors.Control;
+                _contact.Surname = SurnameTextbox.Text;
             }
-            catch (ArgumentException TooMuchSymbolsException)
+            catch (ArgumentException exception)
             {
-                SurnameBox.BackColor = Color.LightSalmon;
+                _exceptionMessages[0] = "Surname: " + exception.Message + "\n";
+                SurnameTextbox.BackColor = Color.LightSalmon;
             }
         }
 
@@ -59,12 +69,14 @@ namespace ContactsAppUI
         {
             try
             {
-                NameBox.BackColor = SystemColors.Control;
-                _contact.Name = NameBox.Text;
+                _exceptionMessages[1] = "";
+                NameTextbox.BackColor = SystemColors.Control;
+                _contact.Name = NameTextbox.Text;
             }
             catch (ArgumentException exception)
             {
-                NameBox.BackColor = Color.LightSalmon; ;
+                _exceptionMessages[1] = "Name: " + exception.Message + "\n";
+                NameTextbox.BackColor = Color.LightSalmon;
             }
         }
 
@@ -72,12 +84,13 @@ namespace ContactsAppUI
         {
             try
             {
-                PhoneBox.BackColor = SystemColors.Control;
-                _contact.PhoneNumber.Number = PhoneBox.Text;
+                _exceptionMessages[2] = "";
+                PhoneTextbox.BackColor = SystemColors.Control;
+                _contact.PhoneNumber.Number = PhoneTextbox.Text;
             }
             catch (ArgumentException exception)
             {
-                PhoneBox.BackColor = Color.LightSalmon;
+                _exceptionMessages[2] = "Phone: " + exception.Message + "\n";
             }
         }
 
@@ -85,12 +98,14 @@ namespace ContactsAppUI
         {
             try
             {
-                EmailBox.BackColor = SystemColors.Control;
-                _contact.Email = EmailBox.Text;
+                _exceptionMessages[3] = "";
+                EmailTextbox.BackColor = SystemColors.Control;
+                _contact.Email = EmailTextbox.Text;
             }
             catch (ArgumentException exception)
             {
-                EmailBox.BackColor = Color.LightSalmon;
+                _exceptionMessages[3] = "E-mail: " + exception.Message + "\n";
+                EmailTextbox.BackColor = Color.LightSalmon;
             }
         }
 
@@ -98,12 +113,14 @@ namespace ContactsAppUI
         {
             try
             {
-                VKIdBox.BackColor = SystemColors.Control;
-                _contact.VkId = VKIdBox.Text;
+                _exceptionMessages[4] = "";
+                VKIdTextbox.BackColor = SystemColors.Control;
+                _contact.VkId = VKIdTextbox.Text;
             }
             catch (ArgumentException exception)
             {
-                VKIdBox.BackColor = Color.LightSalmon;
+                _exceptionMessages[4] = "VkID: " + exception.Message + "\n";
+                VKIdTextbox.BackColor = Color.LightSalmon;
             }
         }
 
@@ -111,13 +128,60 @@ namespace ContactsAppUI
         {
             try
             {
-                BirthdayDateTime.BackColor = SystemColors.Control;
-                _contact.Birthday = BirthdayDateTime.Value;
+                _exceptionMessages[5] = "";
+                _contact.Birthday = BirthdayDateTimebox.Value;
             }
             catch (ArgumentException exception)
             {
-                BirthdayDateTime.BackColor = Color.LightSalmon;
+                _exceptionMessages[5] = "Birthday: " + exception.Message + "\n";
             }
+        }
+
+        private string MessageFormation(string[] arr)
+        {
+            string message = "";
+
+            foreach (var messages in arr)
+            {
+                message += messages;
+            }
+
+            return message;
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void ContactForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult != DialogResult.OK)
+            {
+                DialogResult result = MessageBox.Show(@"Are you sure you want to cancel the action",
+                    "", MessageBoxButtons.YesNo);
+                e.Cancel = (result != DialogResult.Yes);
+            }
+        }
+
+        private bool CheckExceptionMessage()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (_exceptionMessages[i] != "")
+                {
+                    var message = MessageFormation(_exceptionMessages);
+                    MessageBox.Show(
+                        message,
+                        @"Input errors",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
