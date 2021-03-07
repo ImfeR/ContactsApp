@@ -30,18 +30,18 @@ namespace ContactsApp
             {
                 if (value.Where((t, i) => char.IsNumber(value.ToString(), i) != true).Any())
                 {
-                    throw new ArgumentException("Вводимое значение должно состоять из чисел");
+                    throw new ArgumentException("The input value must consist of numbers");
                 }
                 if (value.Length != 11)
                 {
                     throw new ArgumentException(
-                        "Количество чисел в номере телефона должны быть равны 11 вместе с 7, а их было " +
+                        "The number of numbers in the phone number should be equal to 11 along with 7, and there were " +
                         value.Length);
                 }
 
                 if (value[0] != '7')
                 {
-                    throw new ArgumentException("Номер должен начинаться с 7, а вы ввели " + value[0]);
+                    throw new ArgumentException("The number must start with 7, and you entered " + value[0]);
                 }
                 else
                 {

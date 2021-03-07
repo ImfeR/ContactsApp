@@ -57,11 +57,12 @@ namespace ContactsApp
                 value = value.Trim();
                 if (value.Length > MaxLineLength)
                 {
-                    throw new ArgumentException("Фамилия может содержать не больше " + MaxLineLength + " символов");
+                    throw new ArgumentException("The surname can contain no more than" + MaxLineLength 
+                        + " characters, and you have " + value.Length);
                 }
                 if (value.Length == 0)
                 {
-                    throw new ArgumentException("Фамилия может содержать не менее 1 символа");
+                    throw new ArgumentException("The surname can contain at least 1 character");
                 }
                 else
                 {
@@ -88,12 +89,12 @@ namespace ContactsApp
                 value = value.Trim();
                 if (value.Length > MaxLineLength)
                 {
-                    throw new ArgumentException("Имя может содержать не больше " 
-                                                + MaxLineLength + "символов");
+                    throw new ArgumentException("The name can contain no more than" + MaxLineLength
+                        + " characters, and you have " + value.Length);
                 }
                 if (value.Length == 0)
                 {
-                    throw new ArgumentException("Имя может содержать не менее 1 символа");
+                    throw new ArgumentException("The name can contain at least 1 character");
                 }
                 else
                 {
@@ -120,12 +121,14 @@ namespace ContactsApp
             {
                 if (value > DateTime.Now)
                 {
-                    throw new ArgumentException("Дата не может быть больше текущей даты.");
+                    throw new ArgumentException("The date cannot be greater than the current date, " +
+                                                "and you entered" + value.Date);
                 }
                 DateTime minDate = new DateTime(1900, 1, 1);
                 if (value < minDate)
                 {
-                    throw new ArgumentException("Дата не может быть меньше 01.01.1900.");
+                    throw new ArgumentException("The date cannot be less than 01.01.1900, " +
+                                                "and you entered" + value.Date);
                 }
                 else
                 {
@@ -160,12 +163,12 @@ namespace ContactsApp
                 value = value.Trim();
                 if (value.Length > MaxLineLength)
                 {
-                    throw new ArgumentException("E-mail может содержать не больше " 
-                                                + MaxLineLength + " символов");
+                    throw new ArgumentException("E-mail can contain no more than" + MaxLineLength
+                        + " characters, and you have " + value.Length);
                 }
                 if (value.Length == 0)
                 {
-                    throw new ArgumentException("E-mail может содержать не менее 1 символа");
+                    throw new ArgumentException("E-mail can contain at least 1 character");
                 }
                 else
                 {
@@ -205,6 +208,7 @@ namespace ContactsApp
         /// <param name="birthday">День рождения контакта.</param>
         /// <param name="email">E-mail контакта.</param>
         /// <param name="vkId">ID на vk.com контакта.</param>
+        [JsonConstructor]
         public Contact(PhoneNumber phoneNumber, string name, string surname, DateTime birthday, string email, string vkId)
         {
             PhoneNumber = phoneNumber;

@@ -20,6 +20,10 @@ namespace ContactsAppUI
             }
             else
             {
+                ContactSurnameComparer surnameComparer = new ContactSurnameComparer();
+
+                _project.Contacts.Sort(surnameComparer);
+
                 for (int i = 0; i < _project.Contacts.Count; i++)
                 {
                     ContactsList.Items.Insert(i, _project.Contacts[i].Surname);
@@ -32,14 +36,19 @@ namespace ContactsAppUI
         private void addContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Contact newContact = new Contact();
-            var addContactForm = new AddEditContact();
+            var addContactForm = new ContactForm();
 
             addContactForm.Contact = newContact;
             addContactForm.ShowDialog();
-
-            var index = _project.AddNewContact(newContact);
+            
+            _project.Contacts.Add(newContact);
             var surname = newContact.Surname;
 
+            ContactSurnameComparer surnameComparer = new ContactSurnameComparer();
+            _project.Contacts.Sort(surnameComparer);
+
+            var index = _project.Contacts.IndexOf(newContact);
+            
             ContactsList.Items.Insert(index, surname);
 
             ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
@@ -82,7 +91,7 @@ namespace ContactsAppUI
             else
             {
                 Contact newContact = (Contact)_project.Contacts[ContactsList.SelectedIndex].Clone();
-                var addContactForm = new AddEditContact();
+                var addContactForm = new ContactForm();
 
                 addContactForm.Contact = newContact;
                 addContactForm.ShowDialog();
@@ -90,8 +99,13 @@ namespace ContactsAppUI
                 _project.Contacts.RemoveAt(ContactsList.SelectedIndex);
                 ContactsList.Items.RemoveAt(ContactsList.SelectedIndex);
 
-                var index = _project.AddNewContact(newContact);
+                _project.Contacts.Add(newContact);
                 var surname = newContact.Surname;
+
+                ContactSurnameComparer surnameComparer = new ContactSurnameComparer();
+                _project.Contacts.Sort(surnameComparer);
+
+                var index = _project.Contacts.IndexOf(newContact);
 
                 ContactsList.Items.Insert(index, surname);
 

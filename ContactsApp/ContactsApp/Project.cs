@@ -14,35 +14,6 @@ namespace ContactsApp
         public List<Contact> Contacts { get; set; }
 
         /// <summary>
-        /// Добавление нового контакта в сортированом порядке.
-        /// </summary>
-        /// <param name="newContact">Объект класса Contact нового контакта</param>
-        public int AddNewContact(Contact newContact)
-        {
-            if (Contacts == null)
-            {
-                Contacts = new List<Contact> {newContact};
-                return 0;
-            }
-            else
-            {
-                string newContactNameSurname = newContact.Surname + newContact.Name;
-                for (int i = 0; i < Contacts.Count; i++)
-                {
-                    string currentContactNameSurname = Contacts[i].Surname + Contacts[i].Name;
-
-                    if (string.Compare(newContactNameSurname, currentContactNameSurname) <= 0)
-                    {
-                        Contacts.Insert(i,newContact);
-                        return i;
-                    }
-                }
-                Contacts.Add(newContact);
-                return Contacts.Count - 1;
-            }
-        }
-
-        /// <summary>
         /// Конструктор по умолчанию.
         /// </summary>
         public Project()

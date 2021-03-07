@@ -1,6 +1,6 @@
 ﻿namespace ContactsAppUI
 {
-    partial class AddEditContact
+    partial class ContactForm
     {
         /// <summary>
         /// Required designer variable.

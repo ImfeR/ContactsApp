@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ContactsAppUI
 {
-    public partial class AddEditContact : Form
+    public partial class ContactForm : Form
     {
         private Contact _contact;
 
@@ -31,7 +31,7 @@ namespace ContactsAppUI
         }
 
 
-        public AddEditContact()
+        public ContactForm()
         {
             InitializeComponent();
         }
