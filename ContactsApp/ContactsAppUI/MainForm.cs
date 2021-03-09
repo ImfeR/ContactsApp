@@ -36,9 +36,8 @@ namespace ContactsAppUI
         private void addContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Contact newContact = new Contact();
-            var addContactForm = new ContactForm();
+            var addContactForm = new ContactForm {Contact = newContact};
 
-            addContactForm.Contact = newContact;
             addContactForm.ShowDialog();
 
             if (addContactForm.DialogResult == DialogResult.OK)
@@ -94,7 +93,7 @@ namespace ContactsAppUI
             }
         }
 
-        private void removeContactToolStripMenuItem_Click(object sender, EventArgs e)
+        internal void removeContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ContactsListbox.SelectedIndex == -1)
             {
@@ -117,9 +116,8 @@ namespace ContactsAppUI
             else
             {
                 Contact newContact = (Contact)_project.Contacts[ContactsListbox.SelectedIndex].Clone();
-                var addContactForm = new ContactForm();
+                var addContactForm = new ContactForm {Contact = newContact};
 
-                addContactForm.Contact = newContact;
                 addContactForm.ShowDialog();
 
                 if (addContactForm.DialogResult == DialogResult.OK)

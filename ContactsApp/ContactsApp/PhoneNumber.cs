@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json;
-
 
 namespace ContactsApp
 {
@@ -38,15 +36,11 @@ namespace ContactsApp
                         "The number of numbers in the phone number should be equal to 11 along with 7, and there were " +
                         value.Length);
                 }
-
                 if (value[0] != '7')
                 {
                     throw new ArgumentException("The number must start with 7, and you entered " + value[0]);
                 }
-                else
-                {
-                    _number = value;
-                }
+                _number = value;
             }
         }
     }

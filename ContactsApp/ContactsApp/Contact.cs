@@ -14,12 +14,12 @@ namespace ContactsApp
         /// <summary>
         /// Имя контакта.
         /// </summary>
-        private string _name = "name";
+        private string _name = "Name";
 
         /// <summary>
         /// Фамилия контакта.
         /// </summary>
-        private string _surname = "surname";
+        private string _surname = "Surname";
 
         /// <summary>
         /// День рождения контакта.
@@ -64,13 +64,11 @@ namespace ContactsApp
                 {
                     throw new ArgumentException("The surname can contain at least 1 character");
                 }
-                else
-                {
-                    var firstLetter = value[0];
-                    value = value.Substring(1);
-                    value = firstLetter.ToString().ToUpper() + value;
-                    _surname = value;
-                }
+                var firstLetter = value[0];
+                value = value.Substring(1);
+                value = firstLetter.ToString().ToUpper() + value;
+                _surname = value;
+                
             }
         }
 
@@ -96,14 +94,10 @@ namespace ContactsApp
                 {
                     throw new ArgumentException("The name can contain at least 1 character");
                 }
-                else
-                {
-                    var firstLetter = value[0];
-                    value = value.Substring(1);
-                    value = firstLetter.ToString().ToUpper() + value;
-                    _name = value;
-                }
-
+                var firstLetter = value[0];
+                value = value.Substring(1);
+                value = firstLetter.ToString().ToUpper() + value;
+                _name = value;
             }
         }
 
@@ -132,10 +126,7 @@ namespace ContactsApp
                                                 "and you entered: " + value.Date.Day 
                                                 + "." + value.Date.Month + "." + value.Date.Year);
                 }
-                else
-                {
-                    _birthday = value;
-                }
+                _birthday = value;
             }
         }
 
@@ -172,10 +163,7 @@ namespace ContactsApp
                 {
                     throw new ArgumentException("E-mail can contain at least 1 character");
                 }
-                else
-                {
-                    _email = value;
-                }
+                _email = value;
             }
         }
 
@@ -197,7 +185,6 @@ namespace ContactsApp
                     throw new ArgumentException("VK ID can contain no more than" + MaxLineLength
                         + " characters, and you have " + value.Length);
                 }
-
                 _vkId = value;
             }
         }
