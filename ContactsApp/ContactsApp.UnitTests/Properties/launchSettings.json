@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ContactsApp.UnitTests": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\repos\\ContactsApp\\ContactsApp\\ContactsApp.UnitTests"
+    }
+  }
+}

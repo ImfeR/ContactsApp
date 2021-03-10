@@ -58,9 +58,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BirthdayTextbox = new System.Windows.Forms.TextBox();
+            this.BirthdayPanel = new System.Windows.Forms.Panel();
+            this.BirthdaySurnamesLabel = new System.Windows.Forms.Label();
+            this.BirthdayLabel = new System.Windows.Forms.Label();
+            this.BirthdayPictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.BirthdayPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BirthdayPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // Find
@@ -139,6 +145,7 @@
             this.FindTextbox.Name = "FindTextbox";
             this.FindTextbox.Size = new System.Drawing.Size(219, 20);
             this.FindTextbox.TabIndex = 7;
+            this.FindTextbox.TextChanged += new System.EventHandler(this.FindTextbox_TextChanged);
             // 
             // SurnameTextbox
             // 
@@ -260,8 +267,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // AddContactButton
             // 
@@ -358,6 +366,45 @@
             this.BirthdayTextbox.Size = new System.Drawing.Size(61, 20);
             this.BirthdayTextbox.TabIndex = 15;
             // 
+            // BirthdayPanel
+            // 
+            this.BirthdayPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BirthdayPanel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BirthdayPanel.Controls.Add(this.BirthdaySurnamesLabel);
+            this.BirthdayPanel.Controls.Add(this.BirthdayLabel);
+            this.BirthdayPanel.Controls.Add(this.BirthdayPictureBox);
+            this.BirthdayPanel.Location = new System.Drawing.Point(363, 363);
+            this.BirthdayPanel.Name = "BirthdayPanel";
+            this.BirthdayPanel.Size = new System.Drawing.Size(489, 124);
+            this.BirthdayPanel.TabIndex = 22;
+            // 
+            // BirthdaySurnamesLabel
+            // 
+            this.BirthdaySurnamesLabel.AutoSize = true;
+            this.BirthdaySurnamesLabel.Location = new System.Drawing.Point(100, 65);
+            this.BirthdaySurnamesLabel.Name = "BirthdaySurnamesLabel";
+            this.BirthdaySurnamesLabel.Size = new System.Drawing.Size(35, 13);
+            this.BirthdaySurnamesLabel.TabIndex = 2;
+            this.BirthdaySurnamesLabel.Text = "label7";
+            // 
+            // BirthdayLabel
+            // 
+            this.BirthdayLabel.AutoSize = true;
+            this.BirthdayLabel.Location = new System.Drawing.Point(100, 48);
+            this.BirthdayLabel.Name = "BirthdayLabel";
+            this.BirthdayLabel.Size = new System.Drawing.Size(108, 13);
+            this.BirthdayLabel.TabIndex = 1;
+            this.BirthdayLabel.Text = "Today is the birthday:";
+            // 
+            // BirthdayPictureBox
+            // 
+            this.BirthdayPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("BirthdayPictureBox.Image")));
+            this.BirthdayPictureBox.Location = new System.Drawing.Point(24, 36);
+            this.BirthdayPictureBox.Name = "BirthdayPictureBox";
+            this.BirthdayPictureBox.Size = new System.Drawing.Size(60, 59);
+            this.BirthdayPictureBox.TabIndex = 0;
+            this.BirthdayPictureBox.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,20 +412,27 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(852, 486);
+            this.Controls.Add(this.BirthdayPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(868, 2000);
             this.MinimumSize = new System.Drawing.Size(868, 525);
             this.Name = "MainForm";
             this.Text = "ContactsApp";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.BirthdayPanel.ResumeLayout(false);
+            this.BirthdayPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BirthdayPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,6 +469,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox BirthdayTextbox;
+        private System.Windows.Forms.Panel BirthdayPanel;
+        private System.Windows.Forms.PictureBox BirthdayPictureBox;
+        private System.Windows.Forms.Label BirthdaySurnamesLabel;
+        private System.Windows.Forms.Label BirthdayLabel;
     }
 }
 

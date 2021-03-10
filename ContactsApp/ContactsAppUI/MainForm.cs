@@ -1,5 +1,6 @@
 ﻿using ContactsApp;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ContactsAppUI
@@ -7,6 +8,8 @@ namespace ContactsAppUI
     public partial class MainForm : Form
     {
         private Project _project;
+
+        private Project _projectWithLine;
 
         public MainForm()
         {
@@ -30,6 +33,35 @@ namespace ContactsAppUI
                 }
 
                 ContactsListbox.SelectedIndex = 0;
+
+                Stack<string> birthdaySurnames = _project.BirthdayToday(DateTime.Today);
+
+                if (birthdaySurnames.Count != 0)
+                {
+                    BirthdayPanel.Visible = true;
+
+                    string surnames = "";
+
+                    var count = birthdaySurnames.Count;
+
+                    for (int i = 0; i < count ; i++)
+                    {
+                        if (birthdaySurnames.Count == 1)
+                        {
+                            surnames = surnames + birthdaySurnames.Pop() + ".";
+                        }
+                        else
+                        {
+                            surnames = surnames + birthdaySurnames.Pop() + ", ";
+                        }
+                    }
+
+                    BirthdaySurnamesLabel.Text = surnames;
+                }
+                else
+                {
+                    BirthdayPanel.Visible = false;
+                }
             }
         }
 
@@ -58,30 +90,40 @@ namespace ContactsAppUI
 
         private void ContactsList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Project selectedProject;
+            if (FindTextbox.Text != "")
+            {
+                selectedProject = _projectWithLine;
+            }
+            else
+            {
+                selectedProject = _project;
+            }
+
             if (ContactsListbox.SelectedIndex > -1)
             {
-                SurnameTextbox.Text = _project.Contacts[ContactsListbox.SelectedIndex].Surname;
-                NameTextbox.Text = _project.Contacts[ContactsListbox.SelectedIndex].Name;
-                if (_project.Contacts[ContactsListbox.SelectedIndex].Birthday.Day < 10)
+                SurnameTextbox.Text = selectedProject.Contacts[ContactsListbox.SelectedIndex].Surname;
+                NameTextbox.Text = selectedProject.Contacts[ContactsListbox.SelectedIndex].Name;
+                if (selectedProject.Contacts[ContactsListbox.SelectedIndex].Birthday.Day < 10)
                 {
-                    BirthdayTextbox.Text = @"0" + _project.Contacts[ContactsListbox.SelectedIndex].Birthday.Day + @".";
+                    BirthdayTextbox.Text = @"0" + selectedProject.Contacts[ContactsListbox.SelectedIndex].Birthday.Day + @".";
                 }
                 else
                 {
-                    BirthdayTextbox.Text = _project.Contacts[ContactsListbox.SelectedIndex].Birthday.Day + @".";
+                    BirthdayTextbox.Text = selectedProject.Contacts[ContactsListbox.SelectedIndex].Birthday.Day + @".";
                 }
-                if (_project.Contacts[ContactsListbox.SelectedIndex].Birthday.Month < 10)
+                if (selectedProject.Contacts[ContactsListbox.SelectedIndex].Birthday.Month < 10)
                 {
-                    BirthdayTextbox.Text += @"0" + _project.Contacts[ContactsListbox.SelectedIndex].Birthday.Month + @".";
+                    BirthdayTextbox.Text += @"0" + selectedProject.Contacts[ContactsListbox.SelectedIndex].Birthday.Month + @".";
                 }
                 else
                 {
-                    BirthdayTextbox.Text += _project.Contacts[ContactsListbox.SelectedIndex].Birthday.Month + @".";
+                    BirthdayTextbox.Text += selectedProject.Contacts[ContactsListbox.SelectedIndex].Birthday.Month + @".";
                 }
-                BirthdayTextbox.Text += _project.Contacts[ContactsListbox.SelectedIndex].Birthday.Year;
-                EmailTextbox.Text = _project.Contacts[ContactsListbox.SelectedIndex].Email;
-                PhoneTextbox.Text = @"+" + _project.Contacts[ContactsListbox.SelectedIndex].PhoneNumber.Number;
-                VKIdTextbox.Text = _project.Contacts[ContactsListbox.SelectedIndex].VkId;
+                BirthdayTextbox.Text += selectedProject.Contacts[ContactsListbox.SelectedIndex].Birthday.Year;
+                EmailTextbox.Text = selectedProject.Contacts[ContactsListbox.SelectedIndex].Email;
+                PhoneTextbox.Text = @"+" + selectedProject.Contacts[ContactsListbox.SelectedIndex].PhoneNumber.Number;
+                VKIdTextbox.Text = selectedProject.Contacts[ContactsListbox.SelectedIndex].VkId;
             }
             else
             {
@@ -90,6 +132,7 @@ namespace ContactsAppUI
                 BirthdayTextbox.Text = "";
                 PhoneTextbox.Text = "";
                 VKIdTextbox.Text = "";
+                EmailTextbox.Text = "";
             }
         }
 
@@ -111,7 +154,7 @@ namespace ContactsAppUI
         {
             if (ContactsListbox.SelectedIndex == -1)
             {
-                MessageBox.Show(@"Select contact for delete");
+                MessageBox.Show(@"Select contact for Edit");
             }
             else
             {
@@ -138,6 +181,60 @@ namespace ContactsAppUI
                     ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
                 }
             }
+        }
+
+        private void FindTextbox_TextChanged(object sender, EventArgs e)
+        {
+            ContactsListbox.Items.Clear();
+
+            ContactsListbox.SelectedIndex = -1;
+
+            SurnameTextbox.Text = "";
+            NameTextbox.Text = "";
+            BirthdayTextbox.Text = "";
+            PhoneTextbox.Text = "";
+            VKIdTextbox.Text = "";
+            EmailTextbox.Text = "";
+
+            if (FindTextbox.Text == "")
+            {
+                for (int i = 0; i < _project.Contacts.Count; i++)
+                {
+                    ContactsListbox.Items.Insert(i, _project.Contacts[i].Surname);
+                }
+                return;
+            }
+
+            var line = FindTextbox.Text.Trim(' ');
+
+            var firstLetter = line[0];
+            line = line.Substring(1);
+            line = firstLetter.ToString().ToUpper() + line;
+
+            _projectWithLine = _project.ContactContainsLine(line);
+
+            if (_projectWithLine.Contacts.Count != 0)
+            {
+                for (int i = 0; i < _projectWithLine.Contacts.Count; i++)
+                {
+                    ContactsListbox.Items.Insert(i, _projectWithLine.Contacts[i].Surname);
+                }
+            }
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char)Keys.Delete)
+            {
+                removeContactToolStripMenuItem_Click(RemoveContactButton, null);
+            }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm form = new AboutForm();
+
+            form.ShowDialog();
         }
     }
 }

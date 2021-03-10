@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ContactsApp
 {
@@ -18,6 +19,38 @@ namespace ContactsApp
         public Project()
         {
             Contacts = new List<Contact>();
+        }
+
+        public Project ContactContainsLine(string line)
+        {
+            Project contactsWithLine = new Project();
+
+            for (int i = 0; i < Contacts.Count; i++)
+            {
+                var nameAndSurname = Contacts[i].Surname + Contacts[i].Name;
+
+                if (nameAndSurname.Contains(line))
+                {
+                    contactsWithLine.Contacts.Add(Contacts[i]);
+                }
+            }
+
+            return contactsWithLine;
+        }
+
+        public Stack<string> BirthdayToday(DateTime date)
+        {
+            Stack<string> surnames = new Stack<string>();
+
+            for (int i = 0; i < Contacts.Count; i++)
+            {
+                if (Contacts[i].Birthday.Day == date.Day && Contacts[i].Birthday.Month == date.Month)
+                {
+                    surnames.Push(Contacts[i].Surname);
+                }
+            }
+
+            return surnames;
         }
 
         /// <summary>
