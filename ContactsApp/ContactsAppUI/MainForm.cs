@@ -15,7 +15,7 @@ namespace ContactsAppUI
         {
             InitializeComponent();
 
-            _project = ProjectManager.LoadFromFile(@"D:\repos\ContactsAppTests\",@"test.JSON");
+            _project = ProjectManager.LoadFromFile(ProjectManager._path + ProjectManager._fileName);
             if (_project == null || _project.Contacts.Count == 0 )
             {
                 _project = new Project();
@@ -84,7 +84,7 @@ namespace ContactsAppUI
 
                 ContactsListbox.Items.Insert(index, surname);
 
-                ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
+                ProjectManager.SaveToFile(ProjectManager._path + ProjectManager._fileName, _project);
             }
         }
 
@@ -146,7 +146,7 @@ namespace ContactsAppUI
             {
                 _project.Contacts.RemoveAt(ContactsListbox.SelectedIndex);
                 ContactsListbox.Items.RemoveAt(ContactsListbox.SelectedIndex);
-                ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
+                ProjectManager.SaveToFile(ProjectManager._path + ProjectManager._fileName, _project);
             }
         }
 
@@ -178,7 +178,7 @@ namespace ContactsAppUI
 
                     ContactsListbox.Items.Insert(index, surname);
 
-                    ProjectManager.SaveToFile(@"D:\repos\ContactsAppTests\", @"test.JSON", _project);
+                    ProjectManager.SaveToFile(ProjectManager._path + ProjectManager._fileName, _project);
                 }
             }
         }

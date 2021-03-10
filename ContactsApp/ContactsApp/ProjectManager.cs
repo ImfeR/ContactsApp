@@ -6,8 +6,8 @@ namespace ContactsApp
 {
     public static class ProjectManager
     {
-        public static string _path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\ContactsApp";
-        public static string _fileName = @"Contacts.json";
+        public static string _path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Densiov\ContactsApp\";
+        public static string _fileName = @"Contacts.node.json";
 
         /// <summary>
         /// Метод записи объекта <see cref="Project"> в файл.
@@ -16,9 +16,10 @@ namespace ContactsApp
         /// <param name="filePath">Значение пути к директории расположения файла.</param>
         /// <param name="project">Записываемый экземпляр <see cref="Project">.
         /// </param>
-        public static void SaveToFile(string filePath, string fileName, Project project)
+        public static void SaveToFile(string filePath, Project project)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(filePath);
+            var directoryPath = System.IO.Path.GetDirectoryName(filePath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
             if (!directoryInfo.Exists)
             {
                 directoryInfo.Create();
@@ -26,7 +27,7 @@ namespace ContactsApp
 
             var stringJSON = JsonConvert.SerializeObject(project, Formatting.Indented);
 
-            using (StreamWriter streamWriter = new StreamWriter(filePath + fileName, false))
+            using (StreamWriter streamWriter = new StreamWriter(filePath, false))
             {
                 streamWriter.Write(stringJSON);
             }
@@ -39,14 +40,16 @@ namespace ContactsApp
         /// <param name="filePath">Значение пути к директории расположения файла.</param>
         /// <returns>Объект <see cref="Project">.
         /// </returns>
-        public static Project LoadFromFile(string filePath, string fileName)
+        public static Project LoadFromFile(string filePath)
         {
-            if (!Directory.Exists(filePath))
+            var directoryPath = System.IO.Path.GetDirectoryName(filePath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
+            if (!directoryInfo.Exists)
             {
                 return new Project();
             }
 
-            if (!File.Exists(filePath + fileName))
+            if (!File.Exists(filePath))
             {
                 return new Project();
             }
@@ -55,7 +58,7 @@ namespace ContactsApp
 
             JsonSerializer serializer = new JsonSerializer();
 
-            using (StreamReader sr = new StreamReader(filePath + fileName))
+            using (StreamReader sr = new StreamReader(filePath))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 project = (Project)serializer.Deserialize<Project>(reader);
